@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Arham</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: white;
+            text-align: center;
+        }
+        .chat-box {
+            width: 60%;
+            margin: 20px auto;
+            background: #2b2b2b;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .user { background: #4a90e2; text-align: left; }
+        .bot { background: #7d3c98; text-align: right; }
+        input, button {
+            padding: 10px;
+            width: 80%;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background: #4a90e2;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Chat with Arham</h2>
+    <div class="chat-box">
+        {% for msg in messages %}
+            <div class="message {% if msg.sender == 'You' %}user{% else %}bot{% endif %}">
+                <strong>{{ msg.sender }}:</strong> {{ msg.text }}
+            </div>
+        {% endfor %}
+    </div>
+    <form method="POST">
+        <input type="text" name="message" placeholder="Type your message..." required>
+        <button type="submit">Send</button>
+    </form>
+    <a href="{{ url_for('clear_chat') }}"><button>Clear Chat</button></a>
+</body>
+</html>
